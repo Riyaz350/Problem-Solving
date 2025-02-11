@@ -1,17 +1,13 @@
 class Solution(object):
     def isIsomorphic(self, s, t):
         dict1 = {}
-        ans= ''
-        testString =''
+        dict2 = {}
         for i in range(len(s)):
-            if s[i] in dict1:
-                continue;
-            elif t[i] not in testString:
-                dict1[s[i]]= t[i]
-                testString += t[i]
-            else:
-                dict1[s[i]]= ''
+            if s[i] not in dict1:
+                dict1[s[i]] = i
+            if t[i] not in dict2:
+                dict2[t[i]] = i
             
-        for i, l in enumerate(s):
-            ans =ans+ dict1[l]
-        return ans == t
+            if dict1[s[i]] != dict2[t[i]]:
+                return False;
+        return True;
