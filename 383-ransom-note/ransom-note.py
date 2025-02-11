@@ -1,15 +1,16 @@
 class Solution(object):
     def canConstruct(self, ransomNote, magazine):
-        ransomNote = "".join(sorted(ransomNote))
-        magazine = "".join(sorted(magazine))
-        i=0;
-        j=0;
-        while i <= len(ransomNote)-1 and j< len(magazine):
-            while j<=len(magazine)-1:
-                if ransomNote[i] == magazine[j]:
-                    i+=1;
-                    j+=1;
-                    break;
-                else:
-                    j+=1;
-        return i == len(ransomNote)
+        mag= {}
+        ans = True;
+        for i, num in enumerate(magazine):
+            if num in mag:
+                mag[num] +=1;
+            else:
+                mag[num] = 1;
+        
+        for i in ransomNote:
+            if i in mag and mag[i] != 0:
+                mag[i]-=1 ;
+            else:
+                ans = False;
+        return ans;
