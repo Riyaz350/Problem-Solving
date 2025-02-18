@@ -1,16 +1,16 @@
 class Solution(object):
     def topKFrequent(self, nums, k):
-        ans = []
-        dict1 = {}
-        for num in nums:
-            if num not in dict1:
-                dict1[num]=1;
-            else:
-                dict1[num] +=1
-        for i in range(k):
-            maxVal= max(dict1.values())
-            key = [k for k, v in  dict1.items() if v == maxVal][0]
-            
-            ans.append(key)
-            dict1.pop(key)
-        return ans
+        dic1 = {}
+        ans = [[]  for i in range(len(nums)+1)]
+
+        for i in nums:
+            dic1[i]= 1+dic1.get(i,0)
+        for i, num in dic1.items():
+            ans[num].append(i)
+
+        res = []
+        for i in range(len(nums), 0 ,-1):
+            for j in ans[i]:
+                res.append(j)
+                if len(res) == k:
+                    return res
