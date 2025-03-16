@@ -1,18 +1,18 @@
 class Solution(object):
     def isSubsequence(self, s, t):
+        """
+        :type s: str
+        :type t: str
+        :rtype: bool
+        """
         s= list(s)
         t= list(t)
-        k=0
-        j=0
-        if s and t:
-            while j< len(t) and k<len(s):
-                if t[j] != s[k]:
-                    j+=1
-                else:
-                    k+=1
-                    j+=1
-        elif len(s)==0:
-            return True
-
-        return k == len(s)
-                    
+        i = 0
+        for j in range(len(t)):
+            if not s:
+                return True
+            if i<len(s) and s[i] == t[j]:
+                i+=1
+            else:
+                continue
+        return i == len(s)
