@@ -1,18 +1,20 @@
 class Solution(object):
     def maxOperations(self, nums, k):
+        """
+        :type nums: List[int]
+        :type k: int
+        :rtype: int
+        """
         c = Counter(nums)
         seen = set()
-        count =0
-        for i in nums:
-            if i == k-i and i not in seen:
-                if c[i]>1:
-                    seen.add(i)
-                    count += c[i]//2
+        count = 0
+        for i in range(len(nums)):
+            if nums[i] not in seen and k-nums[i] in c:
+                if nums[i] == k - nums[i]:
+                    count+=c[nums[i]]//2
+                    seen.add(nums[i])
                 else:
-                    continue
-            if k-i in c and i not in seen and k-i not in seen:
-                count += min(c[i], c[k-i])
-                seen.add(i)
-                seen.add(k-i)
+                    count+=min(c[nums[i]], c[k-nums[i]])  
+                    seen.add(nums[i])
+                    seen.add(k-nums[i])
         return count
-
